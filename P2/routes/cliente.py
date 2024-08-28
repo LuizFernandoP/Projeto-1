@@ -13,23 +13,24 @@ def inserir_cliente():
         try:
             Cliente.create(nome=nome, email=email, senha=senha)
             flash('Cadastro realizado com sucesso!', 'success')
-            return redirect(url_for('cliente.login'))
+            return redirect(url_for('home.index'))
         except Exception as e:
             flash(f'Erro ao cadastrar usuário: {e}', 'danger')
             return render_template('index.html')
-    return render_template('cadastro.html')
+    
 
 @cliente_route.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
         senha = request.form.get('password')
+        
+        
 
         try:
             usuario = Cliente.get(Cliente.email == email, Cliente.senha == senha)
-            flash('Login realizado com sucesso!', 'success')
-            return redirect(url_for('home.index'))
+            return render_template('home.html')
         except Cliente.DoesNotExist:
             flash('Email ou senha incorretos.', 'danger')
-            return render_template('login.html')
-    return render_template('login.html')
+            return render_template('index.html')
+    
