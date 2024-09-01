@@ -1,0 +1,18 @@
+# Ambiente Virtual
+venv/
+*.pyc
+*.pyo
+__pycache__/
+
+# Arquivos de Log
+*.log
+*.log.*
+
+# Banco de Dados SQLite
+*.sqlite3
+*.db
+
+
+
+
+
