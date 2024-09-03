@@ -4,7 +4,7 @@ from peewee import SqliteDatabase, Model, CharField, ForeignKeyField
 import random
 
 # Configuração do banco de dados SQLite
-db = SqliteDatabase('projeto1.db')
+db = SqliteDatabase('adrielle.db')
 
 # Modelo das tabelas do banco de dados
 
