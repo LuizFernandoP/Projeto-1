@@ -3,6 +3,7 @@ from flask_cors import CORS
 from peewee import SqliteDatabase, Model, CharField, ForeignKeyField
 import random
 
+
 # Configuração do banco de dados SQLite
 db = SqliteDatabase('adrielle.db')
 
@@ -13,8 +14,6 @@ class User(Model):
     name = CharField()
     email = CharField(unique=True)
     password = CharField()
-
-
 
 
     class Meta:
@@ -33,8 +32,8 @@ def gerar_codigo_padrao():
     return str(random.randint(1000, 9999))  # Gera um código de 4 dígitos
 
 # Inicializando o aplicativo Flask
-app = Flask(__name__)
-CORS(app)  # Habilita CORS para todas as rotas
+app = Flask(__name__ ) 
+  # Habilita CORS para todas as rotas
 
 # Conectando ao banco de dados e criando as tabelas
 db.connect()
