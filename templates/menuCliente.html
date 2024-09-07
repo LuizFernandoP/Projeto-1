@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu de Serviços</title>
+    <link rel="stylesheet" href="../static/css/menus.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="menuCliente.html"><img src="/static/img/logo.png" alt="Logo" /></a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <h1>Nossos serviços</h1>
+        <p>Oferecemos uma ampla rede de profissionais para atender suas principais necessidades residenciais e comerciais. Escolha uma opção:</p>
+        
+        <div class="servicos">
+            <!-- Serviço Pedreiro -->
+            <div class="servico-item">
+                <img src="/static/img/pedreiro-img.svg" alt="Foto Pedreiro">
+                <h3>Pedreiro</h3>
+                <form action="/solicitar" method="POST">
+                    <input type="hidden" name="servico" value="pedreiro">
+                    <button type="submit">Solicitar</button>
+                </form>
+            </div>
+            
+            <!-- Serviço Encanador -->
+            <div class="servico-item">
+                <img src="/static/img/encanador-img.svg" alt="Foto Encanador">
+                <h3>Encanador</h3>
+                <form action="/solicitar" method="POST">
+                    <input type="hidden" name="servico" value="encanador">
+                    <button type="submit">Solicitar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<!--
+from flask import Flask, render_template, request, redirect, url_for
+
+app = Flask(__name__)
+
+@app.route('/solicitar', methods=['POST'])
+def solicitar():
+    servico = request.form.get('servico')
+    
+    # Lógica para salvar a solicitação no banco de dados
+    # Exemplo:
+    # db.solicitacoes.insert_one({"servico": servico})
+
+    return redirect(url_for('menu'))  # Redireciona de volta para o menu ou página desejada
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+-->

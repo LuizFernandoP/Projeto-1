@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!--esse link embaixo é pra conectar com o arquivo css, daí bota o arquivo no href-->
+    <link rel="stylesheet" href="../static/css/reset.css" />
+    <link rel="stylesheet" href="../static/css/cadastros.css" />
+  </head>
+
+  <body>
+      <!--header: "cabeçalho da página"-->
+      <header>
+        <div class="logo">
+            <a href="/" ><img src="/static/img/logo.png" alt="Logo" /></a>
+        </div>
+        
+    </header>
+      <div class="container-cadastro">
+        <h1 id="title" class="text-center">Cadastre-se</h1>
+        <p id="description" class="description text-center">
+          Tem clientes te esperando!
+        </p>
+        
+        <!--o formulário começa daqui, essas são as informações que vao ser enviadas-->
+        <form id="form-cadastro">
+          <div class="form-group">
+            <label id="name-label" for="name">Nome</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="form-control"
+              placeholder="Insira seu nome"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label id="email-label" for="email">E-mail</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              class="form-control"
+              placeholder="Insira seu email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label id="name-label" for="name">Telefone</label>
+            <input
+              type="tel"
+              name="telefone"
+              id="telefone"
+              class="form-control"
+              placeholder="(XX)XXXXX-XXXX"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label id="number-label" for="number">Idade</label>
+            <input
+              type="number"
+              name="age"
+              id="number"
+              min="18"
+              max="99"
+              class="form-control"
+              placeholder="Idade"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <p>Escolha a categoria dos serviços que você realiza</p>
+            <select id="dropdown" name="servicos" class="form-control" required>
+              <option disabled selected value>Select categoria atual</option>
+              <option value="pedreiro">Pedreiro</option>
+              <option value="encanador">Encanador</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <p>Descreva sua experiência e atuação profissional</p>
+            <textarea
+              id="atuacao"
+              class="input-textarea"
+              name="atuacao"
+              placeholder="Fale sobre sua experiência..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" id="submit" class="submit-button">
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
+  </body>
+</html>

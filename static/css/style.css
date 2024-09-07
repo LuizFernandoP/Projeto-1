@@ -1,7 +1,4 @@
-/* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:ital@0;1&display=swap');
-
-/* Collor  Geral */
 
 :root {
     --primary:#3155e7;
@@ -13,17 +10,87 @@
     --body:#f6f5f7;
 }
 
-/* Geral Componentes */
 body{
     font-family:"Montserrat","sans-serif" ;
     font-weight: 400;
     font-style: normal;
     background-color:var(--body);
+    margin-top: 80px;
+}
+
+/* Estilo para o Header */
+header {
+    width: 100%;
+    background-color: #363CC8;
+    padding: 15px 30px; /* Espaço lateral para alinhamento */
+    display: flex;
+    justify-content: space-between; /* Mantém o espaço entre logo e navbar */
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    max-height: 70px;
+}
+
+header .logo {
+    margin-left: 10px;
+}
+
+header .logo img {
+    height: 90px;
+}
+
+/* Estilo para a Navbar */
+.navbar {
+    padding: 0; /* Remove o padding extra */
+    margin: 0; /* Remove margens adicionais */
+    flex-grow: 1; /* Faz com que a navbar ocupe o espaço restante */
+    justify-content: flex-end; /* Alinha itens da navbar à direita */
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center; /* Centraliza verticalmente os itens */
+    margin-left: auto; /* Empurra os itens para o lado direito */
+}
+
+.nav-link {
+    margin-left: 20px; /* Espaço entre os links */
+    font-size: 16px;
+    color: var(--gray-1);
+    text-decoration: none; /* Remove sublinhado */
+    transition: color 0.3s; /* Transição suave para mudança de cor */
+}
+
+.nav-link:hover {
+    color: #fff; /* Cor ao passar o mouse */
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    color: var(--black);
+}
+
+/* Estilo para o botão "Entrar" */
+.navbar .btn-outline-secondary {
+    border: 1px solid var(--gray-2);
+    color: var(--black);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-left: 20px; /* Espaçamento à esquerda */
+    padding: 8px 16px; /* Padding ajustado */
+    transition: all 0.3s ease; /* Transição suave para hover */
+}
+
+.navbar .btn-outline-secondary:hover {
+    background-color: var(--gray-2); /* Cor de fundo ao passar o mouse */
+    color: #fff; /* Cor do texto ao passar o mouse */
 }
 
 
-
-/* Buttons */
 .btn{
     border-radius: 8px;
 }
@@ -57,32 +124,6 @@ body{
     color: var(--black);
 }
 
-/* Navbar */
-
-.navbar .btn-outline-secondary{
-    border: 1px solid var(--gray-2);
-    color: var(--black);
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    padding: 16px, 16px;
-}
-
-.navbar{
-    padding: 20px 0;
-}
-
-.nav-link{
-    margin-left: 41px;
-    font-size: 16px;
-    color: var(--gray-1);
-}
-
-.navbar-nav .nav-link.active{
-    font-weight: bold;
-    color:var(--black) ;
-}
-/* main section */
 
 section.main{   /* Porque uso de pontos  nas classes? */
     padding: 40px 0;
@@ -106,7 +147,6 @@ section.main .text{
     font-weight: bold;
     line-height: 24px;
 }
-/* profissional Section */
 
 section.profissional{
     padding: 80px 80px;
@@ -153,7 +193,6 @@ section.profissional .desc p{
     padding-bottom: 80px;
 
 }
-/* Information section */
 
 section.information.text-information{
     padding:180px 0;
@@ -180,11 +219,8 @@ section.information.info-1{
     padding: 20px 0;
 }
 
-/* Footer section */
 footer{
     padding-top:80px;
     padding-bottom: 10px;
 
 }
-
-
