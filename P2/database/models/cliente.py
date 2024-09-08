@@ -11,3 +11,13 @@ class Cliente(Model):
         table_name = 'clientes'
 
 
+
+class Profissional(Model):
+    nome = CharField()
+    especialidade = CharField()
+    bio = CharField()
+    foto= CharField()
+    
+    class Meta:
+        database = db
+        

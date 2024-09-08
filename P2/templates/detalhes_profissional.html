@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ profissional.nome }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/detalhes_profissional.css') }}">
+
+</head>
+<div>
+<body>
+    <img src="{{ url_for('static', filename='uploads/profissionais/' + profissional.foto) }}" alt="Foto do profissional">
+
+    <h1>{{ profissional.nome }}</h1>
+    <p>Especialidade: {{ profissional.especialidade }}</p>
+    <p>Bio: {{ profissional.bio }}</p>
+    <a href="{{ url_for('cliente.lista_profissionais') }}">Voltar para a lista</a>
+</body>
+</div>
+</html>

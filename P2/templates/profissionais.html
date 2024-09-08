@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Profissionais</title>
+</head>
+<body>
+    <h1>Lista de Profissionais</h1>
+    <ul>
+        {% for profissional in profissionais %}
+        <li>
+            <a href="{{ url_for('cliente.detalhes_profissional', id=profissional.id) }}">
+                {{ profissional.nome }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
