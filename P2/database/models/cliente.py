@@ -9,3 +9,5 @@ class Cliente(Model):
     class Meta:
         database = db
         table_name = 'clientes'
+
+
