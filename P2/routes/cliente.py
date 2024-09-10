@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash,current_app 
+from flask import Blueprint, render_template, request, redirect, url_for, flash,current_app ,send_file
 from database.models.cliente import Cliente ,Profissional
 import os
-
+from werkzeug.utils import secure_filename
  
 
 cliente_route = Blueprint('cliente', __name__)
@@ -16,21 +16,25 @@ def cadastrar_profissional():
         return 'Nenhuma foto selecionada', 400
 
     # Verificar se o diretório existe, e se não, criá-lo
-    upload_folder = current_app.config['UPLOAD_FOLDER']
+    upload_folder = os.path.join(current_app.root_path, 'static/uploads/profissionais')
     if not os.path.exists(upload_folder):
         os.makedirs(upload_folder)
 
     # Salvar a foto no servidor
-    caminho_foto = os.path.join(upload_folder, foto.filename)
+    caminho_foto = os.path.join(upload_folder, secure_filename(foto.filename))
     foto.save(caminho_foto)
 
-    # Salvar os dados no banco de dados
-    nome = request.form['nome']
-    especialidade = request.form['especialidade']
-    bio = request.form['bio']
-    novo_profissional = Profissional.create(nome=nome, especialidade=especialidade, bio=bio, foto=caminho_foto)
+    # Salvar os dados no banco de dados com o caminho relativo à pasta 'static'
+    caminho_foto_relativo = 'uploads/profissionais/' + secure_filename(foto.filename)
+    nome = request.form.get('nome')
+    especialidade = request.form.get('especialidade')
+    bio = request.form.get('bio')
+    
+    # Salvar no banco de dados
+    novo_profissional = Profissional.create(nome=nome, especialidade=especialidade, bio=bio, foto=caminho_foto_relativo)
     
     return redirect(url_for('cliente.lista_profissionais'))
+
 
 
 @cliente_route.route('/profissionais')

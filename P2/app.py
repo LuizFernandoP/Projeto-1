@@ -2,10 +2,10 @@
 from flask import Flask
 from configuration import configure_all
 from routes.cliente import cliente_route
-
+import os
 app = Flask(__name__)
 
-app.config['UPLOAD_FOLDER'] = 'static/uploads/profissionais'
+app.config['UPLOAD_FOLDER']=os.path.join(os.getcwd() ,'static/uploads/profissionais')
 
 
 
