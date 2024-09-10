@@ -15,22 +15,22 @@ def cadastrar_profissional():
     if foto.filename == '':
         return 'Nenhuma foto selecionada', 400
 
-    # Verificar se o diretório existe, e se não, criá-lo
+    
     upload_folder = os.path.join(current_app.root_path, 'static/uploads/profissionais')
     if not os.path.exists(upload_folder):
         os.makedirs(upload_folder)
 
-    # Salvar a foto no servidor
+    
     caminho_foto = os.path.join(upload_folder, secure_filename(foto.filename))
     foto.save(caminho_foto)
 
-    # Salvar os dados no banco de dados com o caminho relativo à pasta 'static'
+    
     caminho_foto_relativo = 'uploads/profissionais/' + secure_filename(foto.filename)
     nome = request.form.get('nome')
     especialidade = request.form.get('especialidade')
     bio = request.form.get('bio')
     
-    # Salvar no banco de dados
+    
     novo_profissional = Profissional.create(nome=nome, especialidade=especialidade, bio=bio, foto=caminho_foto_relativo)
     
     return redirect(url_for('cliente.lista_profissionais'))
