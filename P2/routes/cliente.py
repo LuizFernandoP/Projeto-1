@@ -9,6 +9,7 @@ cliente_route = Blueprint('cliente', __name__)
 
 @cliente_route.route('/cadastrar_profissional', methods=['POST'])
 def cadastrar_profissional():
+  
     if 'foto' not in request.files:
         return 'Nenhuma foto enviada', 400
     foto = request.files['foto']
