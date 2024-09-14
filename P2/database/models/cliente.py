@@ -17,7 +17,9 @@ class Profissional(Model):
     especialidade = CharField()
     bio = CharField()
     foto= CharField()
-    
+    email = CharField(unique=True)
+    senha = CharField()
+
     class Meta:
         database = db
         

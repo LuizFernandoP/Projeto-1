@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash,current_app ,send_file
+from flask import Blueprint, render_template, request, redirect, url_for, flash,current_app ,send_file,session
 from database.models.cliente import Cliente ,Profissional
 import os
 from werkzeug.utils import secure_filename
@@ -6,10 +6,27 @@ from werkzeug.utils import secure_filename
 
 cliente_route = Blueprint('cliente', __name__)
 
-
-@cliente_route.route('/cadastrar_profissional', methods=['POST'])
+@cliente_route.route('/cadastrar_profissional', methods=['GET','POST'])
 def cadastrar_profissional():
-  
+    if request.method == 'POST':
+        
+        nome = request.form.get('name')
+        email = request.form.get('email')
+        senha = request.form.get('password')
+
+        session['nome'] = nome
+        session['email'] = email
+        session['senha'] = senha
+
+        
+        return redirect(url_for('cliente.cadastrar_etapa2'))  
+    
+    return render_template('index2.html')
+
+@cliente_route.route('/cadastrar_etapa2', methods=['GET', 'POST'])
+def cadastrar_etapa2():
+  if request.method == 'POST':
+
     if 'foto' not in request.files:
         return 'Nenhuma foto enviada', 400
     foto = request.files['foto']
@@ -27,16 +44,32 @@ def cadastrar_profissional():
 
     
     caminho_foto_relativo = 'uploads/profissionais/' + secure_filename(foto.filename)
-    nome = request.form.get('nome')
+    
     especialidade = request.form.get('especialidade')
     bio = request.form.get('bio')
-    
-    
-    novo_profissional = Profissional.create(nome=nome, especialidade=especialidade, bio=bio, foto=caminho_foto_relativo)
-    
-    return redirect(url_for('cliente.lista_profissionais'))
 
+    
+    try:
+      nome = session.get('nome')
+      email = session.get('email')
+      senha = session.get('senha')
 
+      Profissional.create(
+            nome=nome,
+            especialidade=especialidade,
+            bio=bio,
+            foto=caminho_foto_relativo,
+            email=email,
+            senha=senha
+            
+        )
+      flash('Cadastro realizado com sucesso!', 'success')
+      return render_template('index2.html')
+    except Exception as e:
+            flash(f'Erro ao cadastrar profissional: {e}', 'danger')
+            return render_template('index2.html')
+    
+  return render_template('cadastrar_profissional.html')
 
 @cliente_route.route('/profissionais')
 def lista_profissionais():
@@ -52,7 +85,6 @@ def detalhes_profissional(id):
 
 
 
-
 @cliente_route.route('/cadastro', methods=['GET', 'POST'])
 def inserir_cliente():
     if request.method == 'POST':
@@ -63,12 +95,14 @@ def inserir_cliente():
         try:
             Cliente.create(nome=nome, email=email, senha=senha)
             flash('Cadastro realizado com sucesso!', 'success')
-            return redirect(url_for('home.index'))
+            return render_template('index.html')
         except Exception as e:
             flash(f'Erro ao cadastrar usuário: {e}', 'danger')
             return render_template('index.html')
     
+    return render_template('index.html')
 
+    
 @cliente_route.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -76,11 +110,21 @@ def login():
         senha = request.form.get('password')
         
         
-
         try:
-            usuario = Cliente.get(Cliente.email == email, Cliente.senha == senha)
-            return render_template('home.html')
+            usuario_cliente = Cliente.get(Cliente.email == email, Cliente.senha == senha)
+            return redirect(url_for('cliente.lista_profissionais')) 
+    
         except Cliente.DoesNotExist:
+            pass
+        
+        
+        try:
+            usuario_profissional = Profissional.get(Profissional.email == email, Profissional.senha == senha)
+            
+            flash(f'Bem-vindo, {usuario_profissional.nome}!', 'success')
+            return render_template('profissionais.html')
+        except Profissional.DoesNotExist:
             flash('Email ou senha incorretos.', 'danger')
             return render_template('index.html')
     
+    return render_template('index.html')
