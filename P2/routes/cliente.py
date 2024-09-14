@@ -102,22 +102,26 @@ def inserir_cliente():
     
     return render_template('index.html')
 
-    
 @cliente_route.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
         senha = request.form.get('password')
-        
+
         
         try:
             usuario_cliente = Cliente.get(Cliente.email == email, Cliente.senha == senha)
-            return redirect(url_for('cliente.lista_profissionais')) 
-    
+            
+            if usuario_cliente.is_admin: 
+                flash(f'Bem-vindo, {usuario_cliente.nome}! (Administrador)', 'success')
+                return redirect(url_for('cliente.admin_painel'))  
+            else:
+                return redirect(url_for('cliente.lista_profissionais')) 
+        
         except Cliente.DoesNotExist:
             pass
         
-        
+    
         try:
             usuario_profissional = Profissional.get(Profissional.email == email, Profissional.senha == senha)
             
@@ -126,5 +130,53 @@ def login():
         except Profissional.DoesNotExist:
             flash('Email ou senha incorretos.', 'danger')
             return render_template('index.html')
-    
+
     return render_template('index.html')
+  
+@cliente_route.route('/criar_admin')
+def criar_admin():
+    
+    if Cliente.select().where(Cliente.is_admin == True).exists():
+        return "Um administrador já existe!", 400
+    
+    
+    novo_admin = Cliente.create(nome="Admin", email="admin@gmail.com", senha="1234567", is_admin=True)
+    
+    return "Administrador criado com sucesso!"
+
+
+@cliente_route.route('/admin_painel')
+def admin_painel():
+
+    
+    # Busca todos os profissionais
+    profissionais = Profissional.select()
+    
+    return render_template('admin_painel.html', profissionais=profissionais)
+
+
+
+@cliente_route.route('/delete_profissional/<int:id>', methods=['POST'])
+def delete_profissional(id):
+    
+    profissional = Profissional.get(Profissional.id == id)
+    profissional.delete_instance()
+
+    flash('Profissional excluído com sucesso!', 'success')
+    return redirect(url_for('cliente.admin_painel'))
+
+@cliente_route.route('/lista_clientes')
+def lista_clientes():
+    
+    clientes = Cliente.select()
+    return render_template('lista_clientes.html', clientes=clientes)
+
+
+@cliente_route.route('/delete_cliente/<int:id>', methods=['POST'])
+def delete_cliente(id):
+   
+    cliente = Cliente.get(Cliente.id == id)
+    cliente.delete_instance()
+
+    flash('Cliente excluído com sucesso!', 'success')
+    return redirect(url_for('cliente.lista_clientes'))

@@ -1,10 +1,11 @@
-from peewee import Model, CharField
+from peewee import Model, CharField,BooleanField
 from database.database import db
 
 class Cliente(Model):
     nome = CharField()
     email = CharField(unique=True)
     senha = CharField()
+    is_admin = BooleanField(default=False)  
 
     class Meta:
         database = db
