@@ -19,17 +19,19 @@
 
         .modal-img {
             width: 100%;
-            height: auto; /* Garante que a imagem se ajuste ao modal sem cortar */
+            height: auto; 
         }
     </style>
 </head>
 <body>
     <div class="container mt-4 bio">
         <div class="text-center">
-            <!-- Imagem pequena (200x200) -->
+            
             <img src="{{ url_for('static', filename=profissional.foto) }}" class="img-thumbnail" style="width: 200px; height: 200px; object-fit: cover;" alt="Foto de {{ profissional.nome }}" data-bs-toggle="modal" data-bs-target="#imageModal">
 
             <h1>{{ profissional.nome }}</h1>
+            <p>Contato: {{profissional.telefone}}</p>
+            <p>Cep: {{profissional.cep}}</p>
             <p>Especialidade: {{ profissional.especialidade }}</p>
             <p>Sobre: {{ profissional.bio }}</p>
             <a href="{{ url_for('cliente.lista_profissionais') }}" class="btn btn-secondary">Voltar para a lista</a>

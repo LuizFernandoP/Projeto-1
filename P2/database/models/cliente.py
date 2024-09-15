@@ -20,7 +20,8 @@ class Profissional(Model):
     foto= CharField()
     email = CharField(unique=True)
     senha = CharField()
-
+    telefone = CharField(max_length=15)
+    cep=CharField(max_length=15)
     class Meta:
         database = db
         

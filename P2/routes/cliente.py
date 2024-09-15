@@ -47,8 +47,8 @@ def cadastrar_etapa2():
     
     especialidade = request.form.get('especialidade')
     bio = request.form.get('bio')
-
-    
+    telefone=request.form.get('telefone')
+    cep=request.form.get('cep')
     try:
       nome = session.get('nome')
       email = session.get('email')
@@ -60,8 +60,9 @@ def cadastrar_etapa2():
             bio=bio,
             foto=caminho_foto_relativo,
             email=email,
-            senha=senha
-            
+            senha=senha,
+            telefone=telefone,
+            cep=cep
         )
       flash('Cadastro realizado com sucesso!', 'success')
       return render_template('index2.html')
@@ -107,7 +108,7 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         senha = request.form.get('password')
-
+        
         
         try:
             usuario_cliente = Cliente.get(Cliente.email == email, Cliente.senha == senha)
