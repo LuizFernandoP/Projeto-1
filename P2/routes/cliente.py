@@ -113,7 +113,6 @@ def login():
             usuario_cliente = Cliente.get(Cliente.email == email, Cliente.senha == senha)
             
             if usuario_cliente.is_admin: 
-                flash(f'Bem-vindo, {usuario_cliente.nome}! (Administrador)', 'success')
                 return redirect(url_for('cliente.admin_painel'))  
             else:
                 return redirect(url_for('cliente.lista_profissionais')) 
@@ -124,9 +123,9 @@ def login():
     
         try:
             usuario_profissional = Profissional.get(Profissional.email == email, Profissional.senha == senha)
-            
+            return redirect(url_for('cliente.lista_profissionais')) 
             flash(f'Bem-vindo, {usuario_profissional.nome}!', 'success')
-            return render_template('profissionais.html')
+            
         except Profissional.DoesNotExist:
             flash('Email ou senha incorretos.', 'danger')
             return render_template('index.html')
@@ -149,7 +148,7 @@ def criar_admin():
 def admin_painel():
 
     
-    # Busca todos os profissionais
+    
     profissionais = Profissional.select()
     
     return render_template('admin_painel.html', profissionais=profissionais)
@@ -161,8 +160,6 @@ def delete_profissional(id):
     
     profissional = Profissional.get(Profissional.id == id)
     profissional.delete_instance()
-
-    flash('Profissional excluído com sucesso!', 'success')
     return redirect(url_for('cliente.admin_painel'))
 
 @cliente_route.route('/lista_clientes')
@@ -177,6 +174,4 @@ def delete_cliente(id):
    
     cliente = Cliente.get(Cliente.id == id)
     cliente.delete_instance()
-
-    flash('Cliente excluído com sucesso!', 'success')
     return redirect(url_for('cliente.lista_clientes'))
