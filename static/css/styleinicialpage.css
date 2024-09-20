@@ -1,0 +1,190 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:ital@0;1&display=swap');
+
+/* Collor  Geral */
+
+:root {
+    --primary:#3155e7;
+    --primary-dark:#363CC8;
+    --black:#010101;
+    --gray-1:#788190;
+    --gray-2:#d3d4db;
+    --white:#FFFFFF;
+    --body:#f6f5f7;
+}
+
+/* Geral Componentes */
+body{
+    font-family:"Montserrat","sans-serif" ;
+    font-weight: 400;
+    font-style: normal;
+    background-color:var(--body);
+}
+
+
+
+/* Buttons */
+.btn{
+    border-radius: 8px;
+}
+.btn-primary,
+.btn-outline-secondary{  /* outiline, primary? */
+    padding: 8px 16px;
+    
+
+}
+.btn-primary{
+    background-color:#363CC8;
+}
+
+.btn-primary:hover{
+    background-color: var(--primary-dark);
+}
+
+.btn-outline-secondary{
+    border: 1px solid var(--gray-2);
+    color: var(--black);
+}
+
+.btn-outline-secondary:hover{
+    background-color: var(--gray-2);
+    border: 1px solid var(--gray-2);
+    color: var(--black);
+}
+.btn-outline-secondary:focus{
+    background-color: var(--gray-2);
+    border: 1px solid var(--gray-2);
+    color: var(--black);
+}
+
+/* Navbar */
+
+.navbar .btn-outline-secondary{
+    border: 1px solid var(--gray-2);
+    color: var(--black);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    padding: 16px, 16px;
+}
+
+.navbar{
+    padding: 20px 0;
+}
+
+.nav-link{
+    margin-left: 41px;
+    font-size: 16px;
+    color: var(--gray-1);
+}
+
+.navbar-nav .nav-link.active{
+    font-weight: bold;
+    color:var(--black) ;
+}
+/* main section */
+
+section.main{   /* Porque uso de pontos  nas classes? */
+    padding: 40px 0;
+}
+
+section.main .text{
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 73px;
+    color: black;
+    margin-bottom: 20px;
+    
+}
+
+.buttons{
+    padding-top: 10px;
+}
+
+.buttons .btn{
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+}
+/* profissional Section */
+
+section.profissional{
+    padding: 80px 80px;
+}
+
+section.profissional .text-header h3{
+    padding: 42px 0;
+    line-height: 52px;
+    font-weight: 400;
+    color: var(--black);
+    font-size: 42px;
+}
+
+section.profissional .text-header p{
+    padding: 26px 0;
+    font-size:18px;
+    font-weight: 400;
+    color: var(--gray-1);
+    line-height:24px;
+}
+
+section.profissional .icons{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--black);
+    padding-bottom: 20px;
+
+
+}
+
+
+section.profissional h5{
+    padding: 20px 0;
+}
+
+section.profissional .desc p{
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 22px;
+    color:var(--gray-1);
+    max-width: 204px;
+    margin: 0 auto;
+    padding-bottom: 80px;
+
+}
+/* Information section */
+
+section.information.text-information{
+    padding:180px 0;
+    gap: 40px;
+}
+
+section.information h5{
+    font-size:42px;
+    font-weight:700;
+    line-height:48px;
+    color:var(--blackblack);
+    padding-top: 20px;
+
+}
+
+section.information p{
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+    color: var(--gray-1);
+}
+
+section.information.info-1{
+    padding: 20px 0;
+}
+
+/* Footer section */
+footer{
+    padding-top:80px;
+    padding-bottom: 10px;
+
+}
+
+
