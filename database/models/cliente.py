@@ -5,7 +5,6 @@ class Cliente(Model):
     nome = CharField()
     email = CharField(unique=True)
     senha = CharField()
-    is_admin = BooleanField(default=False)  
 
     class Meta:
         database = db
@@ -25,3 +24,12 @@ class Profissional(Model):
     class Meta:
         database = db
         
+class Admin(Model):
+    nome = CharField()
+    email = CharField(unique=True)
+    senha = CharField()
+    is_admin = BooleanField(default=False)  
+
+    class Meta:
+        database = db
+       

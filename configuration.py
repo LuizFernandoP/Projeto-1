@@ -1,7 +1,7 @@
 from routes.home import home_route
 from routes.cliente import cliente_route
 from database.database import db, init_app
-from database.models.cliente import  Cliente,Profissional
+from database.models.cliente import  Cliente,Profissional,Admin
 
 def configure_all(app):
     configure_routes(app)

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash,current_app ,send_file,session
-from database.models.cliente import Cliente ,Profissional
+from database.models.cliente import Cliente ,Profissional,Admin
 import os
 from werkzeug.utils import secure_filename
  
@@ -108,15 +108,17 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         senha = request.form.get('password')
-        
+
+        try:
+            usuario_admin = Admin.get(Admin.email == email, Admin.senha == senha)
+            return redirect(url_for('cliente.admin_painel'))  
+          
+        except Admin.DoesNotExist:
+            pass
         
         try:
             usuario_cliente = Cliente.get(Cliente.email == email, Cliente.senha == senha)
-            
-            if usuario_cliente.is_admin: 
-                return redirect(url_for('cliente.admin_painel'))  
-            else:
-                return redirect(url_for('cliente.lista_profissionais')) 
+            return redirect(url_for('cliente.lista_profissionais')) 
         
         except Cliente.DoesNotExist:
             pass
@@ -136,11 +138,10 @@ def login():
 @cliente_route.route('/criar_admin')
 def criar_admin():
     
-    if Cliente.select().where(Cliente.is_admin == True).exists():
+    if Admin.select().where(Admin.is_admin == True).exists():
         return "Um administrador já existe!", 400
     
-    
-    novo_admin = Cliente.create(nome="Admin", email="admin@gmail.com", senha="1234567", is_admin=True)
+    novo_admin = Admin.create(nome="Admin", email="admin@gmail.com", senha="1234567", is_admin=True)
     
     return "Administrador criado com sucesso!"
 

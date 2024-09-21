@@ -3,8 +3,8 @@ from peewee import SqliteDatabase
 db = SqliteDatabase('clientes.db')
 
 def init_app(app):
-    from database.models.cliente import Cliente ,Profissional  
+    from database.models.cliente import Cliente ,Profissional,Admin
     with app.app_context():
         db.connect()
-        db.create_tables([Cliente,Profissional])
+        db.create_tables([Cliente,Profissional,Admin])
         
