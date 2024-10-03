@@ -2,9 +2,33 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from database.models.cliente import Cliente ,Profissional,Admin
 import os
 from werkzeug.utils import secure_filename
- 
+
+from flask_socketio import SocketIO, emit, send
+
 
 cliente_route = Blueprint('cliente', __name__)
+
+socketio = SocketIO()
+
+# Lista de mensagens armazenadas
+messages = []
+
+@cliente_route.route('/chat')
+def chat():
+    return render_template('chat.html')
+
+@socketio.on('sendMessage')
+def send_message_handler(msg):
+    messages.append(msg)
+    emit('getMessage', msg, broadcast=True)
+
+@socketio.on('message')
+def message_handler(msg):
+    send(messages)
+
+# Função para iniciar o socketio com a aplicação
+def init_socketio(app):
+    socketio.init_app(app)
 
 @cliente_route.route('/cadastrar_profissional', methods=['GET','POST'])
 def cadastrar_profissional():
